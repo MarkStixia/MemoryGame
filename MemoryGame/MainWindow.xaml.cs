@@ -10,6 +10,7 @@ namespace MemoryGame
     {
         private List<int> CurrentArray = new List<int>();
         private List<int> InputArray = new List<int>();
+        private Random rnd = new Random();
         public MainWindow()
         {
             InitializeComponent();
@@ -19,8 +20,7 @@ namespace MemoryGame
         }
         private void NewColor()
         {
-            Random rnd = new Random();
-            CurrentArray.Add(rnd.Next(0,4));
+            CurrentArray.Add(rnd.Next(0, 4));
         }
         private async void ShowArray()
         {
@@ -28,7 +28,7 @@ namespace MemoryGame
             foreach (var item in CurrentArray)
             {
                 await Task.Delay(300);
-                switch(item)
+                switch (item)
                 {
                     case 0:
                         SetColor(Button1, Color.FromRgb(255, 0, 0));
@@ -78,15 +78,15 @@ namespace MemoryGame
         }
         private void Button1_Click(object sender, RoutedEventArgs e)
         {
-                InputArray.Add(int.Parse(((Button)sender).Uid));
-                Check();
+            InputArray.Add(int.Parse(((Button)sender).Uid));
+            Check();
         }
         private async void ReloadGame()
         {
-            Button1.Background = new SolidColorBrush(Color.FromRgb(212, 175, 175));
-            Button2.Background = new SolidColorBrush(Color.FromRgb(203, 204, 175));
-            Button3.Background = new SolidColorBrush(Color.FromRgb(177, 204, 175));
-            Button4.Background = new SolidColorBrush(Color.FromRgb(175, 199, 204));
+            SetColor(Button1, Color.FromRgb(212, 175, 175));
+            SetColor(Button2, Color.FromRgb(203, 204, 175));
+            SetColor(Button3, Color.FromRgb(177, 204, 175));
+            SetColor(Button4, Color.FromRgb(175, 199, 204));
             MessageBox.Show("Вы проиграли, счет " + CurrentArray.Count);
             CurrentArray.Clear();
             InputArray.Clear();
